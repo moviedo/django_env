@@ -58,11 +58,9 @@ Vagrant.configure(2) do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
 
-  # Run update on the vm
-  config.vm.provision "shell", inline: 'apt-get -y update'
-  config.vm.provision "shell", inline: 'apt-get -y autoremove'
-
-  # Install pip
-  config.vm.provision "shell", inline: 'apt-get -y install python-pip'
+  # Run provisioning script with asible
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "provisioning/ansible/playbook.yml"
+  end
 
 end
