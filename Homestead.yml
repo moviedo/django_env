@@ -1,0 +1,23 @@
+---
+ip: "192.168.10.10"
+memory: 2048
+cpus: 1
+
+# path to your public ssh key
+authorize: ~/.ssh/id_rsa.pub
+
+# path to your private ssh keys
+keys:
+    - ~/.ssh/id_rsa
+
+folders:
+    - map: ~/your/project/directory
+      to: /home/vagrant/project/directory
+
+sites:
+    - map: project_domain.example
+      to: /home/vagrant/wsgi/file/location
+
+variables:
+    - key: APP_ENV
+      value: local
