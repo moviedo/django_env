@@ -10,7 +10,7 @@ VAGRANTFILE_API_VERSION = "2"
 path = "#{File.dirname(__FILE__)}"
 
 require 'yaml'
-require path + '/scripts/homestead.rb'
+require path + '/homestead.rb'
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
@@ -26,6 +26,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   Homestead.configure(
     config, # pass the vagrant config object
-    YAML::load(File.read(path + '/Homestead.yaml')) #parse yaml file
+    YAML::load(File.read(path + '/Homestead.yml')) #parse yaml file
   )
 end
