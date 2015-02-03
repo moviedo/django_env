@@ -10,7 +10,7 @@ VAGRANTFILE_API_VERSION = "2"
 path = "#{File.dirname(__FILE__)}"
 
 require 'yaml'
-require path + '/homestead.rb'
+require path + '/Homestead.rb'
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
