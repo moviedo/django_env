@@ -14,8 +14,39 @@ We're using [Ansible](http://www.ansible.com/about) for [provisioning](https://d
 * Downlaad and add Vagrant base box `vagrant box add ubuntu/trusty64`.
 * Download and install [Ansilbe](http://docs.ansible.com/intro_installation.html). I recommend using pip and easy_install, directions can be found [here.](http://docs.ansible.com/intro_installation.html#latest-releases-via-pip)
 
-### Configurations
-TBD
+### Installing django_env
+Simply clone the repository django_env repository into a central directory where you keep all of your django projects, as the Vagrant box will serve as the host to all of your django projects:
+
+```batch
+git clone https://github.com/moviedo/django_env.git Environment
+```
+
+### Set Your SSH Key
+Edit the Homestead.yml file. In this file, you can configure the path to your public SSH key, as well as the folders you wish to be shared between your main machine and the Vagrant virtual machine.
+
+Don't have an SSH key? Checkout this [link](https://help.github.com/articles/generating-ssh-keys/) to help you get started.
+
+Once you have created a SSH key, specify the key's path in the authorize property of your Homestead.yml file:
+
+```yml
+# path to your public ssh key
+authorize: ~/.ssh/id_rsa.pub
+```
+
+### Configure Your Shared Folders
+The folders property of the Homestead.yml file lists all of the folders you wish to share with the Vagrant environment. As files within these folders are changed, they will be kept in sync between your local machine and the Homestead environment. You may configure as many shared folders as necessary!
+
+The first parameter, map, is the path to the directory your project is located, and the second parameter, to, is the path to the directory in the Vagrant environment. The Vagrant synced directory will be created during provisioning.
+
+```yml
+folders:
+  - map: ~/Developer/project_directory_name
+    to: /home/vagrant/project_directory_name
+```
+
+#### Configuring New Projects
+If you haven't yet created your django project using the command `django-admin.py startproject mysite`, then fear not. Create the directory name for the project you wish to start and add that empty directory to the folders yml configurations. The provisioning process will create a new django project for you.
+
 
 ## Contribution guidelines
 
