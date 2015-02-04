@@ -6,18 +6,16 @@ cpus: 1
 # path to your public ssh key
 authorize: ~/.ssh/id_rsa.pub
 
-# path to your private ssh keys
+# paths to your private ssh keys
 keys:
-    - ~/.ssh/id_rsa
+  - ~/.ssh/id_rsa
 
+# paths to your synced project directories
 folders:
-    - map: ~/your/project/directory
-      to: /home/vagrant/project/directory
+  - map: ~/your/project/directory
+    to: /home/vagrant/project/directory
 
+# map domains to projects 
 sites:
-    - map: project_domain.example
-      to: /home/vagrant/wsgi/file/location
-
-variables:
-    - key: APP_ENV
-      value: local
+  - map: project_domain.example
+    to: /home/vagrant/wsgi/file/location
