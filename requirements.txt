@@ -1,1 +1,3 @@
-ANXS.postgresql
+andyceo.preconf, master
+ANXS.postgresql, v1.0.3
+geerlingguy.mysql, 1.4.2
