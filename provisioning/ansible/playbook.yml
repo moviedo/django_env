@@ -6,18 +6,16 @@
 #   roles:
 #     - common
 
-# - name: Install & Configure MySQL
-#   hosts: all
-#   sudo: yes
-#   roles:
-#     - role: mysql
-#       mysql_bind_address: "127.0.0.1" # The address the mysql server binds on
-#       mysql_root_password: "secret" # The root password
-#       mysql_databases:
-#         - name: homestead
-#       mysql_users:
-#         - name: homestead
-#           pass: secret
+- name: Install & Configure MySQL
+  hosts: all
+  sudo: yes
+  roles:
+    - role: geerlingguy.mysql
+      mysql_root_password: ''
+      mysql_users:
+        - name: homestead
+          host: 127.0.0.1
+          password: secret
 
 - name: Install & Configure Postgres
   hosts: all
@@ -25,8 +23,6 @@
   roles:
     - role: ANXS.postgresql
       postgresql_version: 9.3
-      postgresql_databases:
-        - name: homestead
       postgresql_users:
         - name: homestead
           pass: secret
