@@ -1,10 +1,10 @@
 ---
 # This playbook deploys your application to Vagrant
-# - name: Installs common tools
-#   hosts: all
-#   sudo: yes
-#   roles:
-#     - common
+- name: Install NodeJS and NPM
+  hosts: all
+  sudo: yes
+  roles:
+    - role: JasonGiedymin.nodejs
 
 - name: Install & Configure MySQL
   hosts: all
