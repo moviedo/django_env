@@ -11,6 +11,7 @@
       virtualenvwrapper_shell_rc_file: /home/vagrant/.bashrc
       virtualenvwrapper_venvs_home: /home/vagrant/.virtualenvs
     # - role: rvm
+    - common
 
 - name: Install & Configure MySQL
   hosts: all
