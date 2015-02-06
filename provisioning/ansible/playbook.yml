@@ -10,7 +10,7 @@
     - role: gcporras.virtualenvwrapper
       virtualenvwrapper_shell_rc_file: /home/vagrant/.bashrc
       virtualenvwrapper_venvs_home: /home/vagrant/.virtualenvs
-    # - role: rvm
+    - rvm_io.rvm1-ruby
     - common
 
 - name: Install & Configure MySQL

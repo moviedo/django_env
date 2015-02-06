@@ -3,3 +3,4 @@ geerlingguy.mysql, 1.4.2
 laggyluke.nodejs, v0.2.0
 bobbyrenwick.pip, v1.0
 gcporras.virtualenvwrapper, v1.0.1
+rvm_io.rvm1-ruby, v1.3.5
