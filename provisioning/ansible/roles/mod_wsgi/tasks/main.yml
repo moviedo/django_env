@@ -1,0 +1,4 @@
+---
+
+- name: install mode_wsgi apache module
+  apt: name=libapache2-mod-wsgi state=present
