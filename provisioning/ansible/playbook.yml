@@ -34,14 +34,16 @@
         - name: homestead
           pass: secret
 
+- name: Install Apache and mod_wsgi
+  hosts: all
+  sudo: yes
+  roles:
+    - role: geerlingguy.apache
+      apache_create_vhosts: false
+    - mod_wsgi
+
 # - name: Install & Configure web project(s)
 #   hosts: all
 #   sudo: yes
 #   roles:
 #     - project
-
-# - name: Install & Configure nginx with project sites
-#   hosts: all
-#   sudo: yes
-#   roles:
-#     - role:
