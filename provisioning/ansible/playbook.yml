@@ -42,8 +42,8 @@
       apache_create_vhosts: false
     - mod_wsgi
 
-# - name: Install & Configure web project(s)
-#   hosts: all
-#   sudo: yes
-#   roles:
-#     - project
+- name: Install & Configure web project(s)
+  hosts: all
+  sudo: yes
+  roles:
+    - django
