@@ -1,0 +1,9 @@
+---
+# Run tasks to setup
+
+- include: facts.yml
+- include: virtualenv.yml
+- include: new_project.yml
+- include: static_dirs.yml
+- include: envvars.yml
+- include: vhost.yml

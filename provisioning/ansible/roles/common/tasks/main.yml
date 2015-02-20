@@ -1,0 +1,22 @@
+---
+# This playbook contains common plays that will be run on all nodes.
+
+- name: Install Required Packages
+  apt: name={{ item }} state=installed update_cache=yes
+  with_items:
+    - build-essential
+    - git
+    - curl
+    - wget
+
+- name: Install Grunt
+  npm: name=grunt-cli global=yes state=present
+
+- name: Install Grunt
+  npm: name=grunt-cli global=yes state=present
+
+- name: Install Gulp
+  npm: name=gulp global=yes state=present
+
+- name: Install Bower
+  npm: name=bower global=yes state=present

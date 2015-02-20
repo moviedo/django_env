@@ -1,0 +1,24 @@
+---
+
+- name: Add apache vhosts to sites-available
+  template:
+    src: "vhost.conf.j2"
+    dest: "/etc/apache2/sites-available/{{ item.filename }}.conf"
+    owner: root
+    group: root
+    mode: "u=rw,g=r,o=r"
+  with_items: vhosts
+  notify:
+    - restart apache
+
+- name: Add apache symlink to sites-enabled
+  file:
+    src: "/etc/apache2/sites-available/{{ item.filename }}.conf"
+    dest: "/etc/apache2/sites-enabled/{{ item.filename }}.conf"
+    state: link
+    force: yes
+    owner: root
+    group: root
+  with_items: vhosts
+  notify:
+    - restart apache

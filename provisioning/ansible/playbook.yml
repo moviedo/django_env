@@ -1,0 +1,49 @@
+---
+# This playbook deploys your application to Vagrant
+
+- name: Install common tools
+  hosts: all
+  sudo: yes
+  roles:
+    - laggyluke.nodejs
+    - bobbyrenwick.pip
+    - role: gcporras.virtualenvwrapper
+      virtualenvwrapper_shell_rc_file: /home/vagrant/.bashrc
+      virtualenvwrapper_venvs_home: /home/vagrant/.virtualenvs
+    - rvm_io.rvm1-ruby
+    - common
+
+- name: Install & Configure MySQL
+  hosts: all
+  sudo: yes
+  roles:
+    - role: geerlingguy.mysql
+      mysql_root_password: ''
+      mysql_users:
+        - name: homestead
+          host: 127.0.0.1
+          password: secret
+
+- name: Install & Configure Postgres
+  hosts: all
+  sudo: yes
+  roles:
+    - role: ANXS.postgresql
+      postgresql_version: 9.3
+      postgresql_users:
+        - name: homestead
+          pass: secret
+
+- name: Install Apache and mod_wsgi
+  hosts: all
+  sudo: yes
+  roles:
+    - role: geerlingguy.apache
+      apache_create_vhosts: false
+    - mod_wsgi
+
+- name: Install & Configure web project(s)
+  hosts: all
+  sudo: yes
+  roles:
+    - django

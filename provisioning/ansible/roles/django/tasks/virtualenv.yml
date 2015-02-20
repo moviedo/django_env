@@ -1,0 +1,10 @@
+---
+
+
+
+- name: create virtualenv and add django to virtualenv
+  pip:
+    name: django
+    virtualenv: "/home/vagrant/.virtualenvs/{{ item.name }}"
+    state: present
+  with_items: projects

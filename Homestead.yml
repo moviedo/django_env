@@ -1,0 +1,21 @@
+---
+ip: "192.168.10.10"
+memory: 2048
+cpus: 1
+
+# path to your public ssh key
+authorize: ~/.ssh/id_rsa.pub
+
+# paths to your private ssh keys
+keys:
+  - ~/.ssh/id_rsa
+
+# paths to your synced project directories
+folders:
+  - map: ~/your/project/directory
+    to: /home/vagrant/project/directory
+
+# map domains to projects 
+sites:
+  - map: project_domain.example
+    to: /home/vagrant/wsgi/file/location

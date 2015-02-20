@@ -1,0 +1,11 @@
+---
+
+- name: add configurations to apache envvars for unicode and permissions
+  lineinfile:
+    dest: /etc/apache2/envvars
+    line: "{{ item }}"
+    create: yes
+    state: present
+  with_items: apache_envvars
+  notify:
+    - restart apache

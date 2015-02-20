@@ -1,0 +1,18 @@
+---
+
+- name: add static
+  lineinfile:
+    dest: "{{ item[0].path }}/{{ item[0].name }}/settings.py"
+    line: "{{ item[1] }}"
+    state: present
+  with_nested:
+    - projects
+    - django_settings
+
+- name: create static and media directory for project
+  file:
+    dest: "{{ item[0].path }}/{{ item[1] }}"
+    state: directory
+  with_nested:
+    - projects
+    - django_static_dirs
