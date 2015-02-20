@@ -1,8 +1,5 @@
 ---
 
-# - debug: msg="{{ item }}"
-#   with_items: results.results
-
 - name: create new django projects
   command: "django-admin.py startproject {{ item.item.name }} ."
   args:
