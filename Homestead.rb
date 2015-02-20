@@ -70,6 +70,32 @@ class Homestead
     # Run provisioning script with asible
     config.vm.provision "ansible" do |ansible|
       ansible.playbook = "provisioning/ansible/playbook.yml"
+      # ansible.sudo = true
+
+      # add extra vars to be used in the ansible playbook
+      ansible.extra_vars = { projects:[], vhosts:[] }
+
+      settings["folders"].each do |folder|
+        ansible.extra_vars[:projects].push({
+          path: folder["to"],
+          name: folder["to"].split('/')[-1]
+        })
+      end
+
+      settings["sites"].each_with_index do |sites, i|
+        base = sites['to'].split('/')
+        name = ansible.extra_vars[:projects][i][:name]
+        path = ansible.extra_vars[:projects][i][:path]
+        virtualenv = '/.virtualenv/#{name}/lib/python2.7/site-packages'
+
+        ansible.extra_vars[:vhosts].push({
+          root_path: base[0..-2].join('/'),
+          wsgi_path: sites['to'],
+          virtualenv_path: path + virtualenv,
+          servername: sites['map'],
+          filename: sites['map'].sub(/\./, '_')
+        })
+      end
     end
 
   end
