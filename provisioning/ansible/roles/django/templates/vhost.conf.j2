@@ -1,0 +1,22 @@
+
+Alias /media/ {{ item.root_path }}/media/
+
+<Directory {{ item.root_path }}/static>
+  Require all granted
+</Directory>
+
+Alias /static/ {{ item.root_path }}/static/
+
+<Directory {{ item.root_path }}/media>
+  Require all granted
+</Directory>
+
+ServerName {{ item.servername }}
+WSGIScriptAlias / {{ item.wsgi_path }}/wsgi.py
+WSGIPythonPath {{ item.root_path }}:{{ item.virtualenv_path }}
+
+<Directory {{ item.wsgi_path }}>
+  <Files wsgi.py>
+    Require all granted
+  </Files>
+</Directory>
