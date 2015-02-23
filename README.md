@@ -68,10 +68,11 @@ folders:
 
 If you haven't yet created your django project using the command `django-admin.py startproject mysite`, then fear not. Create the directory name for the project you wish to start and add that empty directory to the folders yaml configurations. The provisioning process will create a new django project for you.
 
-## Important Information Regarding Usage
+## Code Reloading
 
 As this project uses Apache and mod_wsgi and not the builtin django server there is an issue regarding automatic reloading of source code when changed. Mod_wsgi caches your django project in memory so you won't see the changes in browser unless you run the following command on your project wsgi file `touch your_wsgi_file.wsgi`.
 
+You may also choose to use the following [tutorial](http://blog.dscpl.com.au/2008/12/using-modwsgi-when-developing-django.html) to achieve the same automatic code available with the builtin django server.
 
 ## Included Software
 
