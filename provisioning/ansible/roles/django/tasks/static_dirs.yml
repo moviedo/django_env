@@ -16,3 +16,10 @@
   with_nested:
     - projects
     - django_static_dirs
+
+- name: run collect static command
+  django_manage:
+    command: collectstatic
+    app_path: "{{ item.path }}"
+    virtualenv: "/home/vagrant/.virtualenvs/{{ item.name }}"
+  with_items: projects
