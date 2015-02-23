@@ -83,15 +83,14 @@ class Homestead
       end
 
       settings["sites"].each_with_index do |sites, i|
-        base = sites['to'].split('/')
         name = ansible.extra_vars[:projects][i][:name]
         path = ansible.extra_vars[:projects][i][:path]
-        virtualenv = '/.virtualenv/#{name}/lib/python2.7/site-packages'
+        virtualenv = "/.virtualenvs/#{name}/lib/python2.7/site-packages"
 
         ansible.extra_vars[:vhosts].push({
-          root_path: base[0..-2].join('/'),
+          root_path: path,
           wsgi_path: sites['to'],
-          virtualenv_path: path + virtualenv,
+          virtualenv_path: path.split('/')[0..-2].join('/') + virtualenv,
           servername: sites['map'],
           filename: sites['map'].sub(/\./, '_')
         })
