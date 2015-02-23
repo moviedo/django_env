@@ -7,9 +7,9 @@
   roles:
     - laggyluke.nodejs
     - bobbyrenwick.pip
-    - role: gcporras.virtualenvwrapper
-      virtualenvwrapper_shell_rc_file: /home/vagrant/.bashrc
-      virtualenvwrapper_venvs_home: /home/vagrant/.virtualenvs
+    # - role: gcporras.virtualenvwrapper
+    #   virtualenvwrapper_shell_rc_file: /home/vagrant/.bashrc
+    #   virtualenvwrapper_venvs_home: /home/vagrant/.virtualenvs
     - rvm_io.rvm1-ruby
     - common
 
