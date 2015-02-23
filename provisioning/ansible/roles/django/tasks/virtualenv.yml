@@ -1,8 +1,11 @@
 ---
 
+- name: install virtualenv module
+  pip:
+    name: virtualenv
+    state: present
 
-
-- name: create virtualenv and add django to virtualenv
+- name: create virtualenvs and add django to virtualenvs
   pip:
     name: django
     virtualenv: "/home/vagrant/.virtualenvs/{{ item.name }}"
