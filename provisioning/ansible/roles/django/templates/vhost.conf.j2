@@ -12,8 +12,10 @@ Alias /media/ {{ item.root_path }}/media/
 </Directory>
 
 ServerName {{ item.servername }}
+WSGIDaemonProcess {{ item.servername }} python-path={{ item.root_path }}:{{ item.virtualenv_path }}
+WSGIProcessGroup {{ item.servername }}
+
 WSGIScriptAlias / {{ item.wsgi_path }}/wsgi.py
-WSGIPythonPath {{ item.root_path }}:{{ item.virtualenv_path }}
 
 <Directory {{ item.wsgi_path }}>
   <Files wsgi.py>
