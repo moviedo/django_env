@@ -1,11 +1,11 @@
 
-Alias /media/ {{ item.root_path }}/media/
+Alias /static/ {{ item.root_path }}/static/
 
 <Directory {{ item.root_path }}/static>
   Require all granted
 </Directory>
 
-Alias /static/ {{ item.root_path }}/static/
+Alias /media/ {{ item.root_path }}/media/
 
 <Directory {{ item.root_path }}/media>
   Require all granted
