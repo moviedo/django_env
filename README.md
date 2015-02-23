@@ -1,13 +1,16 @@
 # django_env, a Vagrant development environment
 > one box to rule them all
 
-django_env is a Django development environment provisioned on Vagrant using Ansible. Used for supporting multiple django project on one Vagrant instance.
+django_env is a Django development environment provisioned on Vagrant using Ansible. Used for supporting your django project(s) on one Vagrant VM.
 
 ## What does it all mean? ###
-This project allows one to setup multiple [django](https://www.djangoproject.com/) projects and configure the projects quickly and easily all within one Vagrant box. We're using [Vagrant](https://www.vagrantup.com/) and [Virtualbox](https://www.virtualbox.org) as a means to decouple the project from the host operating system. This allows the [django](https://www.djangoproject.com/) projects to stay consistent and independent of the host, your machine, operating system.
+This project allows one to setup a [django](https://www.djangoproject.com/) project(s) and configure the project(s) quickly and easily all within one Vagrant box. We're using [Vagrant](https://www.vagrantup.com/) and [Virtualbox](https://www.virtualbox.org) as a means to decouple the project from the host operating system. This allows the [django](https://www.djangoproject.com/) project(s) to stay consistent and independent of the host, your machine, operating system.
 We're using [Ansible](http://www.ansible.com/about) for [provisioning](https://docs.vagrantup.com/v2/provisioning/index.html), installing software and altering configurations, of the development environment. That's to say, you can destroy the development environment and rebuild it for scratch with just two commands(More on that later).
 
 ## How do I get set up?
+
+This section explains how to get started and setup your django project(s) with Vagrant and Ansible.
+
 ### Prerequisite Software
 * Download and install [VirtualBox](https://www.virtualbox.org/wiki/Downloads) and the Virtualbox [extension pack](https://www.virtualbox.org/wiki/Downloads).
 * Download and install [Vagrant](https://www.vagrantup.com/downloads.html).
@@ -20,6 +23,23 @@ Simply clone the repository django_env repository into a central directory where
 ```batch
 git clone https://github.com/moviedo/django_env.git Environment
 ```
+
+### Vagrant VM Config
+
+This section explains all the configuration options available in the Homestead.yml file regarding Vagrant settings.
+
+`ip: "192.168.10.10"`
+
+IP address for creating a private network for your Vagrant VM. You can find more information about it [here](https://docs.vagrantup.com/v2/networking/index.html) The default configuration works find for most cases.
+
+`memory: 2048`
+
+This is the amount of RAM your Vagrant VM will consume. Unless your computer has large amounts of RAM the default is recommended.
+
+`cpus: 1`
+
+This is the number of CPUs the Vagrant VM will consume. Unless you're using a multi-cpu computer the default is *strongly* recommended.
+
 
 ### Set Your SSH Key
 Edit the Homestead.yml file. In this file, you can configure the path to your public SSH key, as well as the folders you wish to be shared between your main machine and the Vagrant virtual machine.
@@ -36,7 +56,7 @@ authorize: ~/.ssh/id_rsa.pub
 ### Configure Your Shared Folders
 The folders property of the Homestead.yml file lists all of the folders you wish to share with the Vagrant environment. As files within these folders are changed, they will be kept in sync between your local machine and the Homestead environment. You may configure as many shared folders as necessary!
 
-The first parameter, map, is the path to the directory your project is located, and the second parameter, to, is the path to the directory in the Vagrant environment. The Vagrant synced directory will be created during provisioning.
+The first parameter, *map*, is the path to the directory your project is located, and the second parameter, *to*, is the path to the directory in the Vagrant environment. The Vagrant synced directory will be created during provisioning.
 
 ```yml
 folders:
@@ -44,9 +64,14 @@ folders:
     to: /home/vagrant/project_directory_name
 ```
 
-#### Configuring New Projects
+### Configuring New Projects
 
-If you haven't yet created your django project using the command `django-admin.py startproject mysite`, then fear not. Create the directory name for the project you wish to start and add that empty directory to the folders yml configurations. The provisioning process will create a new django project for you.
+If you haven't yet created your django project using the command `django-admin.py startproject mysite`, then fear not. Create the directory name for the project you wish to start and add that empty directory to the folders yaml configurations. The provisioning process will create a new django project for you.
+
+## Important Information Regarding Usage
+
+As this project uses Apache and mod_wsgi and not the builtin django server there is an issue regarding automatic reloading of source code when changed. Mod_wsgi caches your django project in memory so you won't see the changes in browser unless you run the following command on your project wsgi file `touch your_wsgi_file.wsgi`.
+
 
 ## Included Software
 
@@ -61,7 +86,6 @@ If you haven't yet created your django project using the command `django-admin.p
 * wget
 * RVM (With compass, sass)
 * virtualenv
-* virtualenvwrapper
 
 ## Ports
 
