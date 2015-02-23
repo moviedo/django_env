@@ -85,7 +85,7 @@ You may also choose to use the following [tutorial](http://blog.dscpl.com.au/200
 * git
 * curl
 * wget
-* RVM (With compass, sass)
+* RVM
 * virtualenv
 
 ## Ports
