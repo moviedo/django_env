@@ -5,21 +5,8 @@
   apt: name={{ item }} state=installed update_cache=yes
   with_items:
     - build-essential
-    - gcc
-    - make
     - git
     - curl
     - wget
     - python-dev
-
-- name: Install Grunt
-  npm: name=grunt-cli global=yes state=present
-
-- name: Install Grunt
-  npm: name=grunt-cli global=yes state=present
-
-- name: Install Gulp
-  npm: name=gulp global=yes state=present
-
-- name: Install Bower
-  npm: name=bower global=yes state=present
+    - libssl-dev
