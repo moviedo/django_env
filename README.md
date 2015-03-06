@@ -81,7 +81,7 @@ You may also choose to use the following [tutorial](http://blog.dscpl.com.au/200
 * Python 2.7
 * MySQL
 * Postgres 9.3
-* Node (With Bower, Grunt, and Gulp)
+* Node & npm
 * git
 * curl
 * wget
