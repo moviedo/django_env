@@ -15,7 +15,12 @@ folders:
   - map: ~/your/project/directory
     to: /home/vagrant/project/directory
 
-# map domains to projects 
+# map domains to projects
 sites:
   - map: project_domain.example
     to: /home/vagrant/wsgi/file/location
+
+# list of packages used for projects
+packages:
+  # a nice to have
+  - vim
