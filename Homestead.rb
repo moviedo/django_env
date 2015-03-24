@@ -70,7 +70,7 @@ class Homestead
     # Run provisioning script with asible
     config.vm.provision "ansible" do |ansible|
       ansible.playbook = "provisioning/ansible/playbook.yml"
-      # ansible.sudo = true
+      ansible.sudo = true
 
       # add extra vars to be used in the ansible playbook
       ansible.extra_vars = { projects:[], vhosts:[] }
