@@ -3,10 +3,4 @@
 
 - name: Install Required Packages
   apt: name={{ item }} state=installed update_cache=yes
-  with_items:
-    - build-essential
-    - git
-    - curl
-    - wget
-    - python-dev
-    - libssl-dev
+  with_items: common_packages + packages
