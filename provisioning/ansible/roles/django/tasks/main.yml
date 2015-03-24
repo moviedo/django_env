@@ -7,3 +7,4 @@
 - include: static_dirs.yml
 - include: envvars.yml
 - include: vhost.yml
+- include: permission.yml
