@@ -73,7 +73,12 @@ class Homestead
       ansible.sudo = true
 
       # add extra vars to be used in the ansible playbook
-      ansible.extra_vars = { projects:[], vhosts:[] }
+      ansible.extra_vars = {
+        projects:[],
+        vhosts:[],
+        # list of extra packages
+        packages: settings["packages"] ||= []
+      }
 
       settings["folders"].each do |folder|
         ansible.extra_vars[:projects].push({
