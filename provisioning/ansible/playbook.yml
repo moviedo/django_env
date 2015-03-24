@@ -19,8 +19,11 @@
       mysql_root_password: ''
       mysql_users:
         - name: homestead
-          host: 127.0.0.1
+          host: "%"
           password: secret
+          priv: "*.*:ALL"
+      mysql_databases:
+        - name: homestead
 
 - name: Install & Configure Postgres
   hosts: all
