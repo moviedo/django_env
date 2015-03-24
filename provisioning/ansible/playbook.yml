@@ -3,16 +3,17 @@
 
 - name: Install common tools
   hosts: all
-  sudo: yes
   roles:
-    - laggyluke.nodejs
-    - bobbyrenwick.pip
-    - rvm_io.rvm1-ruby
     - common
+    - laggyluke.nodejs
+    - rvm_io.rvm1-ruby
+    - bobbyrenwick.pip
+    - role: gcporras.virtualenvwrapper
+      virtualenvwrapper_shell_rc_file: /home/vagrant/.bashrc
+      virtualenvwrapper_venvs_home: /home/vagrant/.virtualenvs
 
 - name: Install & Configure MySQL
   hosts: all
-  sudo: yes
   roles:
     - role: geerlingguy.mysql
       mysql_root_password: ''
@@ -23,7 +24,6 @@
 
 - name: Install & Configure Postgres
   hosts: all
-  sudo: yes
   roles:
     - role: ANXS.postgresql
       postgresql_version: 9.3
@@ -33,7 +33,6 @@
 
 - name: Install Apache and mod_wsgi
   hosts: all
-  sudo: yes
   roles:
     - role: geerlingguy.apache
       apache_create_vhosts: false
@@ -41,6 +40,5 @@
 
 - name: Install & Configure web project(s)
   hosts: all
-  sudo: yes
   roles:
     - django
