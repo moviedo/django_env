@@ -5,8 +5,10 @@
   hosts: all
   roles:
     - common
-    - laggyluke.nodejs
     - rvm_io.rvm1-ruby
+    - role: ANXS.nodejs
+      nodejs_version: "0.12.1"
+      nodejs_install_method: "binary"
     - bobbyrenwick.pip
     - role: gcporras.virtualenvwrapper
       virtualenvwrapper_shell_rc_file: /home/vagrant/.bashrc
