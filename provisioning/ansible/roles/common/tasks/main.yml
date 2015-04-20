@@ -4,3 +4,9 @@
 - name: Install Required Packages
   apt: name={{ item }} state=installed update_cache=yes
   with_items: common_packages + packages
+
+- name: install npm packages
+  npm: name={{ item }} state=present global=yes
+  with_items:
+    - grunt-cli
+    - gulp
