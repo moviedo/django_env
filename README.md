@@ -11,20 +11,38 @@ We're using [Ansible](http://www.ansible.com/about) for [provisioning](https://d
 
 This section explains how to get started and setup your django project(s) with Vagrant and Ansible.
 
-### Prerequisite Software
-* Download and install [VirtualBox](https://www.virtualbox.org/wiki/Downloads) and the Virtualbox [extension pack](https://www.virtualbox.org/wiki/Downloads).
-* Download and install [Vagrant](https://www.vagrantup.com/downloads.html).
-* Downlaad and add Vagrant base box `vagrant box add ubuntu/trusty64`.
-* Download and install [Ansilbe](http://docs.ansible.com/intro_installation.html). I recommend using pip and easy_install, directions can be found [here.](http://docs.ansible.com/intro_installation.html#latest-releases-via-pip)
+1. Download and install the prerequisite software.
+    * Download and install [VirtualBox](https://www.virtualbox.org/wiki/Downloads) and the Virtualbox [extension pack](https://www.virtualbox.org/wiki/Downloads).
+    * Download and install [Vagrant](https://www.vagrantup.com/downloads.html).
+    * Download and add Vagrant base box `vagrant box add ubuntu/trusty64`.
+    * Download and install [Ansilbe](http://docs.ansible.com/intro_installation.html). I recommend using pip and easy_install, directions can be found [here.](http://docs.ansible.com/intro_installation.html#latest-releases-via-pip)
 
-### Installing django_env
-Simply clone the repository django_env repository into a central directory where you keep all of your django projects, as the Vagrant box will serve as the host to all of your django projects:
+2. Clone django_env repo.
 
-```batch
-git clone https://github.com/moviedo/django_env.git Environment
-```
+    Simply clone the django_env repository into a central directory where you keep all of your django projects, as the Vagrant box will serve as the host to all of your django projects:
 
-### Vagrant VM Config
+    ```bash
+    git clone https://github.com/moviedo/django_env.git
+    ```
+
+3. Configure your project.
+
+    You can find detailed information on how to configure you're project within the *Homestead.yml* file in the section titled **Vagrant VM Config**.
+
+4. Start the VM
+
+    Run the command `vagrant up` to start the VM. This may take a few minutes and you should see the the progression of the provisioning script.
+
+5. Check your site.
+
+    Check your development domain, `http://example.domain:8000`,  to see if apache has served your project correctly. Remember to add the port number to the url or else your page request will fail.
+
+6. SSH into the VM.
+
+    You can ssh into your development VM by running the command `vagrant ssh`.
+
+
+## Vagrant VM Config
 
 This section explains all the configuration options available in the Homestead.yml file regarding Vagrant settings.
 
@@ -54,23 +72,58 @@ authorize: ~/.ssh/id_rsa.pub
 ```
 
 ### Configure Your Shared Folders
-The folders property of the Homestead.yml file lists all of the folders you wish to share with the Vagrant environment. As files within these folders are changed, they will be kept in sync between your local machine and the Homestead environment. You may configure as many shared folders as necessary!
+The folders property of the Homestead.yml file lists all the folders you wish to share with the Vagrant environment. As files within these folders are changed, they will be kept in sync between your local machine and the Homestead environment. You may configure as many shared folders as necessary!
 
 The first parameter, *map*, is the path to the directory your project is located, and the second parameter, *to*, is the path to the directory in the Vagrant environment. The Vagrant synced directory will be created during provisioning.
 
 ```yml
+# paths to your synced project directories
 folders:
   - map: ~/Developer/project_directory_name
     to: /home/vagrant/project_directory_name
 ```
 
+### Domain Mapping
+The sites property of the Homestead file lists all the domain mappings for your projects. This property allows you to map the domain at which the apache server will map to your wsgi.py file.
+
+This domain is also where you will view your project when you make a request with you host browser.
+
+The first parameter, *map*, is the domain and the second parameter, *to*, is the path, within the Vagrant environment, where the project's wsgi.py file is located.
+
+```yml
+# map domains to projects
+sites:
+  - map: project_domain.example
+    to: /home/vagrant/wsgi/file/location
+```
+
+You also need to add the mapping to you hosts file per django project.
+Run the following command to achieve this. Make sure to replace *project_domain.example* with your desired domain.
+
+```bash
+echo '127.0.0.1 project_domain.example' | sudo tee -a /etc/hosts
+```
+
+### Extra Packages
+The packages property take a yaml list of packages that will be installed using the aptitude package manager. This is used for python modules that have C/C++ dependencies, such as PostGIS.
+
+
+```yml
+# list of packages used for projects
+packages:
+  - vim
+  - libpq-dev
+  - postgresql-9.3-postgis-2.1
+  # etc
+```
+
 ### Configuring New Projects
 
-If you haven't yet created your django project using the command `django-admin.py startproject mysite`, then fear not. Create the directory name for the project you wish to start and add that empty directory to the folders yaml configurations. The provisioning process will create a new django project for you.
+If you haven't yet created your django project using the command `django-admin.py startproject mysite`, then fear not. Create the directory name for the project you wish to start and add that empty directory to the yaml configurations. The provisioning process will create a new django project for you.
 
 ## Code Reloading
 
-As this project uses Apache and mod_wsgi and not the builtin django server there is an issue regarding automatic reloading of source code when changed. Mod_wsgi caches your django project in memory so you won't see the changes in browser unless you run the following command on your project wsgi file `touch your_wsgi_file.wsgi`.
+As this project uses Apache and mod_wsgi and not the builtin django server there is an issue regarding automatic reloading of source code when changed. Mod_wsgi caches your django project in memory so you won't see the changes in the browser unless you run the following command on your project wsgi file `touch wsgi.py`.
 
 You may also choose to use the following [tutorial](http://blog.dscpl.com.au/2008/12/using-modwsgi-when-developing-django.html) to achieve the same automatic code available with the builtin django server.
 
@@ -81,12 +134,13 @@ You may also choose to use the following [tutorial](http://blog.dscpl.com.au/200
 * Python 2.7
 * MySQL
 * Postgres 9.3
-* Node & npm
+* Node & npm (Grunt, Gulp)
 * git
-* curl
-* wget
+* vim
 * RVM
+* pip
 * virtualenv
+* virtualenvwrapper
 
 ## Ports
 
