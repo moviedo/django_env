@@ -134,7 +134,7 @@ You may also choose to use the following [tutorial](http://blog.dscpl.com.au/200
 * Python 2.7
 * MySQL
 * Postgres 9.3
-* Node & npm (Grunt, Gulp)
+* Node & npm (Grunt, Gulp, Bower)
 * git
 * vim
 * RVM
