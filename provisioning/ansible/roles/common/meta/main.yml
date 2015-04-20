@@ -1,0 +1,15 @@
+---
+
+dependencies:
+- { role: rvm_io.rvm1-ruby }
+- { role: bobbyrenwick.pip }
+- {
+    role: gcporras.virtualenvwrapper,
+    virtualenvwrapper_shell_rc_file: /home/vagrant/.bashrc,
+    virtualenvwrapper_venvs_home: /home/vagrant/.virtualenvs
+  }
+- {
+    role: ANXS.nodejs,
+    nodejs_version: "0.12.1",
+    nodejs_install_method: "binary"
+  }
