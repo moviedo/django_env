@@ -2,7 +2,9 @@
 
 - name: create virtualenvs and add django to virtualenvs
   pip:
-    name: django
-    virtualenv: "/home/vagrant/.virtualenvs/{{ item.name }}"
+    name: "{{ item[0] }}"
+    virtualenv: "/home/vagrant/.virtualenvs/{{ item[1].name }}"
     state: present
-  with_items: projects
+  with_nested:
+    - [ django, ipdb ]
+    - projects
