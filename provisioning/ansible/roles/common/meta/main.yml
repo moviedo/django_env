@@ -1,15 +1,21 @@
 ---
 
 dependencies:
+- role: moviedo.nvm
+  nvm_user: vagrant
+  nvm_version: "v0.24.1"
+  nvm_node_version: "0.12.*"
+  nvm_npm_pkgs:
+    - pkg: bower
+      version: "*"
+    - pkg: grunt-cli
+      version: "*"
+    - pkg: gulp
+      version: "*"
+    # - pkg: brunch
+    #   version: "*"
 - { role: rvm_io.rvm1-ruby }
 - { role: bobbyrenwick.pip }
-- {
-    role: gcporras.virtualenvwrapper,
-    virtualenvwrapper_shell_rc_file: /home/vagrant/.bashrc,
-    virtualenvwrapper_venvs_home: /home/vagrant/.virtualenvs
-  }
-- {
-    role: ANXS.nodejs,
-    nodejs_version: "0.12.1",
-    nodejs_install_method: "binary"
-  }
+- role: gcporras.virtualenvwrapper
+  virtualenvwrapper_shell_rc_file: /home/vagrant/.bashrc
+  virtualenvwrapper_venvs_home: /home/vagrant/.virtualenvs
