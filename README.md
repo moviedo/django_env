@@ -83,27 +83,6 @@ folders:
     to: /home/vagrant/project_directory_name
 ```
 
-### Domain Mapping
-The sites property of the Homestead file lists all the domain mappings for your projects. This property allows you to map the domain at which the apache server will map to your wsgi.py file.
-
-This domain is also where you will view your project when you make a request with you host browser.
-
-The first parameter, *map*, is the domain and the second parameter, *to*, is the path, within the Vagrant environment, where the project's wsgi.py file is located.
-
-```yml
-# map domains to projects
-sites:
-  - map: project_domain.example
-    to: /home/vagrant/wsgi/file/location
-```
-
-You also need to add the mapping to you hosts file per django project.
-Run the following command to achieve this. Make sure to replace *project_domain.example* with your desired domain.
-
-```bash
-echo '127.0.0.1 project_domain.example' | sudo tee -a /etc/hosts
-```
-
 ### Extra Packages
 The packages property take a yaml list of packages that will be installed using the aptitude package manager. This is used for python modules that have C/C++ dependencies, such as PostGIS.
 
@@ -121,23 +100,16 @@ packages:
 
 If you haven't yet created your django project using the command `django-admin.py startproject mysite`, then fear not. Create the directory name for the project you wish to start and add that empty directory to the yaml configurations. The provisioning process will create a new django project for you.
 
-## Code Reloading
-
-As this project uses Apache and mod_wsgi and not the builtin django server there is an issue regarding automatic reloading of source code when changed. Mod_wsgi caches your django project in memory so you won't see the changes in the browser unless you run the following command on your project wsgi file `touch wsgi.py`.
-
-You may also choose to use the following [tutorial](http://blog.dscpl.com.au/2008/12/using-modwsgi-when-developing-django.html) to achieve the same automatic code available with the builtin django server.
-
 ## Included Software
 
-* Ubuntu 14.04
-* Apache 2.4
+* Ubuntu 16.04
 * Python 2.7
 * MySQL
-* Postgres 9.3
-* Node & npm (Grunt, Gulp, Bower)
+* Postgres 9.6
+* Node 9.6.5 & npm 3.11
+* Grunt, Gulp, Bower, Brunch, Yarn
 * git
 * vim
-* RVM
 * pip
 * virtualenv
 * virtualenvwrapper
@@ -167,4 +139,4 @@ A side note on adding more to the technology stack for your project. If you need
 
 ## Who do I talk to?
 
-* TBD(Repo owner or admin, Other community or team contact)
+* TBD (Repo owner or admin, Other community or team contact)
