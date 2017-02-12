@@ -8,7 +8,7 @@ class Homestead
 
     # Every Vagrant development environment requires a box. You can search for
     # boxes at https://atlas.hashicorp.com/search.
-    config.vm.box = "ubuntu/trusty64"
+    config.vm.box = "ubuntu/xenial64"
     config.vm.hostname = "homestead"
 
     # Create a private network, which allows host-only access to the machine
@@ -74,31 +74,9 @@ class Homestead
 
       # add extra vars to be used in the ansible playbook
       ansible.extra_vars = {
-        projects:[],
-        vhosts:[],
         # list of extra packages
         packages: settings["packages"] ||= []
       }
-
-      settings["folders"].each do |folder|
-        ansible.extra_vars[:projects].push({
-          path: folder["to"],
-          name: folder["to"].split('/')[-1]
-        })
-      end
-
-      settings["sites"].each_with_index do |sites, i|
-        name = ansible.extra_vars[:projects][i][:name]
-        path = ansible.extra_vars[:projects][i][:path]
-        virtualenv = "/.virtualenvs/#{name}/lib/python2.7/site-packages"
-
-        ansible.extra_vars[:vhosts].push({
-          root_path: path,
-          wsgi_path: sites['to'],
-          virtualenv_path: path.split('/')[0..-2].join('/') + virtualenv,
-          servername: sites['map'],
-          filename: sites['map'].sub(/\./, '_')
-        })
       end
     end
 
