@@ -10,41 +10,30 @@
   hosts: all
   roles:
     - role: geerlingguy.mysql
-      mysql_root_password: ''
       mysql_users:
-        - name: homestead
+        - name: vagrant
           host: "%"
           password: secret
           priv: "*.*:ALL"
       mysql_databases:
-        - name: homestead
+        - name: vagrant
 
 - name: Install & Configure Postgres
   hosts: all
   roles:
     - role: ANXS.postgresql
-      postgresql_version: 9.3
+      postgresql_version: 9.6
       postgresql_users:
-        - name: homestead
+        - name: vagrant
           pass: secret
-      #     encrypted: no
-      # postgresql_user_privileges:
-      #   - name: homestead
-      #     db: homestead
-      #     priv: "ALL"
-      # postgresql_databases:
-      #   - name: homestead
-      # postgresql_listen_addresses:
-      #   - "*"
-
-- name: Install Apache and mod_wsgi
-  hosts: all
-  roles:
-    - role: geerlingguy.apache
-      apache_create_vhosts: false
-    - mod_wsgi
-
-- name: Install & Configure web project(s)
-  hosts: all
-  roles:
-    - django
+          encrypted: no
+      postgresql_databases:
+        - name: vagrant
+      postgresql_user_privileges:
+        - name: vagrant
+          db: vagrant
+          priv: "ALL"
+      postgresql_pg_hba_trust_hosts:
+        - '0.0.0.0/32'
+      postgresql_ext_install_postgis: yes
+      postgresql_ext_postgis_version: '2.3.1'
