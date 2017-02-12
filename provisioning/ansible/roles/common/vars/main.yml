@@ -1,9 +1,1 @@
 ---
-
-common_packages:
-  - build-essential
-  - git
-  - curl
-  - wget
-  - python-dev
-  - libssl-dev
