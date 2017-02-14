@@ -1,0 +1,17 @@
+# install_roles.yml
+
+- src: https://github.com/ANXS/postgresql
+  version: v1.7.1
+  name: ANXS.postgresql
+
+- src: geerlingguy.mysql
+  version: 2.5.1
+
+- src: ANXS.python
+  version: v1.0.2
+
+- src: lciolecki.virtualenvwrapper
+  version: v1.0.0
+
+- src: moviedo.nvm
+  version: v1.1.2
