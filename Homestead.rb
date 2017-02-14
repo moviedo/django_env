@@ -30,29 +30,26 @@ class Homestead
     # Create a forwarded port mapping which allows access to a specific port
     # within the machine from a port on the host machine. In the example below,
     # accessing "localhost:8080" will access port 80 on the guest machine.
-    config.vm.network "forwarded_port", guest: 80, host: 8000
-    config.vm.network "forwarded_port", guest: 3306, host: 33060
-    config.vm.network "forwarded_port", guest: 5432, host: 54320
+    config.vm.network(
+      "forwarded_port",
+      guest: 80,
+      host: settings["forward_port"] ||= 8000
+    )
+    config.vm.network(
+      "forwarded_port",
+      guest: 3306,
+      host: settings["mysql_port"] ||= 33060
+    )
+    config.vm.network(
+      "forwarded_port",
+      guest: 5432,
+      host: settings["psql_port"] ||= 54320
+    )
 
-    # Configure The Public Key For SSH Access
+    # Install python 2.7 to unbuntu 16.04
     config.vm.provision "shell" do |s|
-      s.inline = "echo $1 | tee -a /home/vagrant/.ssh/authorized_keys"
-      s.args = [File.read(File.expand_path(settings["authorize"]))]
+      s.inline = "sudo apt-get install -y python-minimal"
     end
-
-    # Copy The SSH Private Keys To The Box
-    settings["keys"].each do |key|
-      config.vm.provision "shell" do |s|
-        s.privileged = false
-        s.inline = "echo \"$1\" > /home/vagrant/.ssh/$2 && chmod 600 /home/vagrant/.ssh/$2"
-        s.args = [File.read(File.expand_path(key)), key.split('/').last]
-      end
-    end
-
-    # Copy The Bash Aliases
-    # config.vm.provision "shell" do |s|
-    #   s.inline = "cp /vagrant/aliases /home/vagrant/.bash_aliases"
-    # end
 
     # Share an additional folder to the guest VM. The first argument is
     # the path on the host to the actual folder. The second argument is
@@ -71,12 +68,20 @@ class Homestead
     config.vm.provision "ansible" do |ansible|
       ansible.playbook = "provisioning/ansible/playbook.yml"
       ansible.sudo = true
+      ansible.galaxy_role_file = 'install_roles.yml'
+      ansible.galaxy_roles_path = '.ansible'
 
       # add extra vars to be used in the ansible playbook
       ansible.extra_vars = {
         # list of extra packages
         packages: settings["packages"] ||= []
       }
+
+      # Pass ssh key as param to ansible
+      if settings.include? 'authorize'
+        if File.exists? File.expand_path(settings["authorize"])
+          ansible.extra_vars[:ssh_key] = File.read(File.expand_path(settings["authorize"]))
+        end
       end
     end
 
