@@ -68,15 +68,17 @@ class Homestead
 
       # add extra vars to be used in the ansible playbook
       ansible.extra_vars = {
+        projects:[],
+
         # list of extra packages
         packages: settings["packages"] ||= []
       }
 
-      # Pass ssh key as param to ansible
-      if settings.include? 'authorize'
-        if File.exists? File.expand_path(settings["authorize"])
-          ansible.extra_vars[:ssh_key] = File.read(File.expand_path(settings["authorize"]))
-        end
+      settings["folders"].each do |folder|
+        ansible.extra_vars[:projects].push({
+          path: folder["to"],
+          name: folder["to"].split('/')[-1]
+        })
       end
     end
 
