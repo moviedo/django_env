@@ -8,7 +8,7 @@ class Homestead
 
     # Every Vagrant development environment requires a box. You can search for
     # boxes at https://atlas.hashicorp.com/search.
-    config.vm.box = "ubuntu/xenial64"
+    config.vm.box = "bento/ubuntu-16.04"
     config.vm.hostname = "homestead"
 
     # Create a private network, which allows host-only access to the machine
@@ -32,7 +32,7 @@ class Homestead
     # accessing "localhost:8080" will access port 80 on the guest machine.
     config.vm.network(
       "forwarded_port",
-      guest: 80,
+      guest: 8000,
       host: settings["forward_port"] ||= 8000
     )
     config.vm.network(
@@ -45,11 +45,6 @@ class Homestead
       guest: 5432,
       host: settings["psql_port"] ||= 54320
     )
-
-    # Install python 2.7 to unbuntu 16.04
-    config.vm.provision "shell" do |s|
-      s.inline = "sudo apt-get install -y python-minimal"
-    end
 
     # Share an additional folder to the guest VM. The first argument is
     # the path on the host to the actual folder. The second argument is
