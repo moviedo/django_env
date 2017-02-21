@@ -1,8 +1,0 @@
----
-
-- name: Configure The Public Key For SSH Access
-  authorized_key:
-    user: ubuntu
-    key: "{{ssh_key}}"
-    manage_dir: yes
-    state: present
