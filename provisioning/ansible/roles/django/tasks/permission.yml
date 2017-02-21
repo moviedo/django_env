@@ -1,17 +1,15 @@
 ---
 
-- name: check owner of .virtualenvs directory
+- name:  django | permission | check owner of .virtualenvs directory
   stat:
-    path: /home/vagrant/.virtualenvs
+    path: "{{django_virtualenv_path}}"
   register: vir_env
 
-- debug: msg="{{ vir_env }}"
-
-- name: fix .virtualenvs permissions
+- name: django | permission | fix .virtualenvs permissions
   file:
-    group: vagrant
-    owner: vagrant
-    path: /home/vagrant/.virtualenvs
+    group: "{{django_user}}"
+    owner: "{{django_user}}"
+    path: "{{django_virtualenv_path}}"
     recurse: yes
     state: directory
-  when: vir_env.stat.pw_name == "root"
+  when: vir_env.stat.pw_name != "{{django_user}}"

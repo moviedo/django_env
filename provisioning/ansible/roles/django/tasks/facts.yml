@@ -3,9 +3,9 @@
 # regarding "register with a loop" check the following link:
 # http://docs.ansible.com/playbooks_loops.html#using-register-with-a-loop
 
-- name: check if django project dir is empty
+- name: django | facts | check if django project dir is empty
   command: ls
   args:
     chdir: "{{ item.path }}"
-  with_items: projects
+  with_items: "{{projects}}"
   register: results

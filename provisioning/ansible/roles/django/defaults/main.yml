@@ -1,0 +1,5 @@
+---
+
+django_user: vagrant
+django_working_path: "/home/{{ django_user }}"
+django_virtualenv_path: "{{ django_working_path }}/.virtualenvs"

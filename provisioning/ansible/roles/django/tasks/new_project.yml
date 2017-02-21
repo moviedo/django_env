@@ -1,8 +1,8 @@
 ---
 
-- name: create new django projects
-  command: "/home/vagrant/.virtualenvs/{{ item.item.name }}/bin/django-admin.py startproject {{ item.item.name }} ."
+- name: django | new_project | create new django projects
+  command: "{{django_virtualenv_path}}/{{ item.item.name }}/bin/django-admin.py startproject {{ item.item.name }} ."
   args:
     chdir: "{{ item.item.path }}"
   when: item.stdout|length == 0
-  with_items: results.results
+  with_items: "{{results.results}}"
