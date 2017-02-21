@@ -1,10 +1,7 @@
 ---
 
 dependencies:
-  - role: ANXS.python
-  - role: lciolecki.virtualenvwrapper
   - role: moviedo.nvm
-    nvm_user: ubuntu
     nvm_npm_pkgs:
       - pkg: grunt-cli
         version: "*"
