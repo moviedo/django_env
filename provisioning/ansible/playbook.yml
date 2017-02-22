@@ -34,7 +34,7 @@
         - name: vagrant
           db: vagrant
           priv: "ALL"
-      postgresql_pg_hba_trust_hosts:
-        - '0.0.0.0/32'
+      postgresql_listen_addresses:
+        - '*'
       postgresql_ext_install_postgis: yes
       postgresql_ext_postgis_version: '2.3'
