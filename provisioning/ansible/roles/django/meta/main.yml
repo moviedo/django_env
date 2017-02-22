@@ -3,3 +3,7 @@
 dependencies:
   - role: ANXS.python
   - role: lciolecki.virtualenvwrapper
+    virtualenv_version: 15.1.0
+    virtualenvwrapper_version: 4.7.2
+    virtualenvwrapper_shell_file: '/home/vagrant/.bashrc'
+    virtualenvwrapper_home: '/home/vagrant/.virtualenvs'
