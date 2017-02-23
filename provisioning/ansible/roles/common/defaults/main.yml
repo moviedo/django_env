@@ -2,3 +2,5 @@
 
 common_packages:
   - wget
+  - libpq-dev
+  - spatialite-bin
