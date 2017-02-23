@@ -6,9 +6,6 @@ forward_port: 8000
 mysql_port: 33060
 psql_port: 54320
 
-# path to your public ssh key
-authorize: ~/.ssh/id_rsa.pub
-
 # paths to your synced project directories
 folders:
   - map: ~/your/project/directory
