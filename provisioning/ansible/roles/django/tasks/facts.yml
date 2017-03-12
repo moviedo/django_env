@@ -9,3 +9,4 @@
     chdir: "{{ item.path }}"
   with_items: "{{projects}}"
   register: results
+  changed_when: no

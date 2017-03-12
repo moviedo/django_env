@@ -1,0 +1,6 @@
+
+geodjango_packages:
+  - libmaxminddb0
+  - libmaxminddb-dev
+  - mmdb-bin
+  - libsqlite3-mod-spatialite

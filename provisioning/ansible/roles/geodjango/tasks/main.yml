@@ -1,0 +1,10 @@
+---
+
+- name: geodjango | Add MaxMind PPA
+  apt_repository:
+    repo: "ppa:maxmind/ppa"
+    state: present
+
+- name: geodjango | Install Maxmind C-libs & spatialite
+  apt: name={{item}} state=present update_cache=yes
+  with_items: "{{geodjango_packages}}"

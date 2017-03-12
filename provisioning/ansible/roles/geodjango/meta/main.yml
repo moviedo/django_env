@@ -1,0 +1,8 @@
+---
+
+dependencies:
+  - role: jgeusebroek.maxmind-geoip
+    maxmind_update_product_ids:
+      - GeoLite2-City
+      - GeoLite2-Country
+    maxmind_cron_email: "generic.api.user@gmail.com"
