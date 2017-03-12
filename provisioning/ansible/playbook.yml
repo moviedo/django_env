@@ -6,44 +6,45 @@
   roles:
     - common
     - django
+    - geodjango
 
-- name: Install & Configure MySQL
-  hosts: all
-  roles:
-    - role: geerlingguy.mysql
-      mysql_users:
-        - name: vagrant
-          host: "%"
-          password: secret
-          priv: "*.*:ALL"
-      mysql_databases:
-        - name: vagrant
-
-- name: Install & Configure Postgres
-  hosts: all
-  roles:
-    - role: ANXS.postgresql
-      postgresql_version: 9.6
-      postgresql_users:
-        - name: vagrant
-          pass: secret
-          encrypted: no
-      postgresql_databases:
-        - name: vagrant
-      postgresql_user_privileges:
-        - name: vagrant
-          db: vagrant
-          priv: "ALL"
-      postgresql_pg_hba_custom:
-        - {
-            type: host,
-            database: all,
-            user: vagrant,
-            address: '0.0.0.0/0',
-            method: md5,
-            comment: 'DB access for host to guest using vagrant user.'
-          }
-      postgresql_listen_addresses:
-        - '*'
-      postgresql_ext_install_postgis: yes
-      postgresql_ext_postgis_version: '2.3'
+# - name: Install & Configure MySQL
+#   hosts: all
+#   roles:
+#     - role: geerlingguy.mysql
+#       mysql_users:
+#         - name: vagrant
+#           host: "%"
+#           password: secret
+#           priv: "*.*:ALL"
+#       mysql_databases:
+#         - name: vagrant
+#
+# - name: Install & Configure Postgres
+#   hosts: all
+#   roles:
+#     - role: ANXS.postgresql
+#       postgresql_version: 9.6
+#       postgresql_users:
+#         - name: vagrant
+#           pass: secret
+#           encrypted: no
+#       postgresql_databases:
+#         - name: vagrant
+#       postgresql_user_privileges:
+#         - name: vagrant
+#           db: vagrant
+#           priv: "ALL"
+#       postgresql_pg_hba_custom:
+#         - {
+#             type: host,
+#             database: all,
+#             user: vagrant,
+#             address: '0.0.0.0/0',
+#             method: md5,
+#             comment: 'DB access for host to guest using vagrant user.'
+#           }
+#       postgresql_listen_addresses:
+#         - '*'
+#       postgresql_ext_install_postgis: yes
+#       postgresql_ext_postgis_version: '2.3'
