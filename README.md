@@ -114,6 +114,8 @@ If you haven't yet created your django project using the command `django-admin.p
 * Postgres 9.6
 * SqLite
 * SpatiaLite
+* MaxMind Geo databases
+* MaxMind libmaxminddb & geoipupdate
 * Node 9.6.5 & npm 3.10
 * Grunt, Gulp, Bower, Brunch, Yarn
 * git
